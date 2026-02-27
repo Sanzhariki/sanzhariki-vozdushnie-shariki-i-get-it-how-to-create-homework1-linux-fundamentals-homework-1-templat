@@ -1,0 +1,90 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: HW1
+      id: hw1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW1
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW2
+      id: hw2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW2
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW3
+      id: hw3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW3
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW4
+      id: hw4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW4
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW5
+      id: hw5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW5
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW6
+      id: hw6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW6
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: HW7
+      id: hw7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: HW7
+        setup-command: ''
+        command: GITHUB_CLASSROOM_SETUP.md
+        timeout: 10
+        max-score: 100
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        HW1_RESULTS: "${{steps.hw1.outputs.result}}"
+        HW2_RESULTS: "${{steps.hw2.outputs.result}}"
+        HW3_RESULTS: "${{steps.hw3.outputs.result}}"
+        HW4_RESULTS: "${{steps.hw4.outputs.result}}"
+        HW5_RESULTS: "${{steps.hw5.outputs.result}}"
+        HW6_RESULTS: "${{steps.hw6.outputs.result}}"
+        HW7_RESULTS: "${{steps.hw7.outputs.result}}"
+      with:
+        runners: hw1,hw2,hw3,hw4,hw5,hw6,hw7
